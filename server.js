@@ -24,6 +24,22 @@ connection.once('open', function () {
 
 app.use('/notes', notesRoutes);
 
+// TODO: fix error handler
+app.use((error, req, res, next) => {
+    if (error.isServer) {
+        // log server errors 5xx status codes
+        // logger.error(error);
+        return res.status(500).json('internal server error');
+
+    }
+    if (error.output && error.output.statusCode) {
+        return res.status(error.output.statusCode).json(error.output.payload);
+    }
+    // return res.status(500).json('internal server error');
+
+});
+
+
 app.listen(config.serverPort, function () {
     console.log("Server is running on Port: " + config.serverPort);
 });
