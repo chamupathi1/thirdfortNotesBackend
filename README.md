@@ -298,3 +298,31 @@ localhost:4000/api/v1/notes/unarchive/
 ```
 
 
+# choose of technology
+
+* node.js 
+app does not require heavy processing 
+have more I/O operations
+
+* mongo db
+to save notes and note status
+adding more fields to a scema is less time consuming
+
+# improvements
+
+* authentication
+
+add authentication layer and authenticate users before they access their notes,
+[probably JWT]
+
+(currently the request must have userId in it's body field)
+
+* improved logging of the application
+
+currently the app logs internal server error in a same file, log them in to different files
+
+* large notes support
+
+notes which are larger needs to store it's content in some file format, 
+it's status can be saved in a db for faster access.
+
