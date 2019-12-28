@@ -1,4 +1,4 @@
-# Thirdfort Notes backend
+# Thirdfort Notes Backend
 
 ## Dependencies
 * node
@@ -23,16 +23,17 @@ npm install
 ```node
 node server.js
 ```
-* api will be served ad
+* api will be served at
 
 ```node
 localhost:[port]/api/v1/
 ```
 
 # Assumptions
-## notes contains only basic strings
-## user who wants to update an archived note, wants to update the archived note as well
-## user who wants to delete an archived note, wants to delete the archived note as well
+## Notes contain only basic strings
+## When a user wants to update a note which is already archived, the user wants to update the archived note as well
+## When a user wants to delete a note which is already archived, the user wants to delete the archived note as well
+
 
 
 # APIS
