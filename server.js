@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const winston = require('winston');
 
 
 // config
@@ -11,6 +12,16 @@ let config = require('./config');
 // routes imports
 let notesRoutes = require('./routes/notesRoutes');
 
+const logger = winston.createLogger({
+    levels: winston.config.syslog.levels,
+    transports: [
+        new winston.transports.Console({ level: 'error' }),
+        new winston.transports.File({
+            filename: 'combined.log',
+            level: 'info'
+        })
+    ]
+});
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -28,14 +39,13 @@ app.use('/notes', notesRoutes);
 app.use((error, req, res, next) => {
     if (error.isServer) {
         // log server errors 5xx status codes
-        // logger.error(error);
+        logger.error(error);
         return res.status(500).json('internal server error');
 
     }
     if (error.output && error.output.statusCode) {
         return res.status(error.output.statusCode).json(error.output.payload);
     }
-    // return res.status(500).json('internal server error');
 
 });
 
