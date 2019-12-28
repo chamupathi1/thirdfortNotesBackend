@@ -1,9 +1,9 @@
 var fs = require('fs');
-var getFilepath = require('./getFilePath');
+var getFilepath = require('../getFilePath');
 
-const fileDeleteHelper = (baseDir, note, next) => {
+const fileDeleteHelper = (note, next) => {
     try {
-        const path = getFilepath(baseDir, note);
+        const path = getFilepath(note);
         fs.unlinkSync(path)
         next();
     } catch (err) {

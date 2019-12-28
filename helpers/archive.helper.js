@@ -1,11 +1,11 @@
 var fs = require('fs');
 var archiver = require('archiver');
-var getFilepath = require('./getFilePath');
+var getFilepath = require('../getFilePath');
 
 
-const archiveHelper = (baseDir, note, next) => {
+const archiveHelper = (note, next) => {
     try {
-        const output = fs.createWriteStream(getFilepath(baseDir, note));
+        const output = fs.createWriteStream(getFilepath(note));
         const archive = archiver('zip', {
             zlib: { level: 9 } // Sets the compression level.
         });
@@ -48,6 +48,7 @@ const archiveHelper = (baseDir, note, next) => {
         archive.append(buffer3, { name: `${note.id}.txt` });
 
         archive.finalize();
+        console.log(`${getFilepath(note)} created`)
         next();
     } catch (error) {
         console.log(error);
