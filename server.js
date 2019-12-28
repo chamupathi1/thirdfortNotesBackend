@@ -33,9 +33,9 @@ connection.once('open', function () {
     console.log("MongoDB database connection established successfully");
 })
 
-app.use('/notes', notesRoutes);
+app.use('/api/v1/notes', notesRoutes);
 
-// TODO: fix error handler
+// error handler
 app.use((error, req, res, next) => {
     if (error.isServer) {
         // log server errors 5xx status codes
